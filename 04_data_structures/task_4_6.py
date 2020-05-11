@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 4.6
 
 Обработать строку ospf_route и вывести информацию на стандартный поток вывода в виде:
@@ -12,6 +12,17 @@ Outbound Interface:    FastEthernet0/0
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
-'''
+"""
 
 ospf_route = 'O        10.0.24.0/24 [110/41] via 10.0.13.3, 3d18h, FastEthernet0/0'
+protocol, prefix, ad, _, nexthop, last_update, out_int = ospf_route.split()
+ad_metric = ad.strip('[]')
+protocol = protocol + 'spf'
+result = (f"Protocol:              {protocol}\n"
+          f"Prefix:                {prefix}\n"
+          f"AD/Metric:             {ad_metric}\n"
+          f"Next-Hop:              {nexthop}\n"
+          f"Last update:           {last_update}\n"
+          f"Outbound Interface:    {out_int}")
+
+print(result)
