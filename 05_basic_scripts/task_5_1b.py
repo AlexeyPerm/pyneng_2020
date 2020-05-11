@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 5.1b
 
 Переделать скрипт из задания 5.1a таким образом, чтобы, при запросе параметра,
@@ -18,7 +18,7 @@ $ python task_5_1b.py
 
 Все задания надо выполнять используя только пройденные темы.
 То есть эту задачу можно решить без использования условия if.
-'''
+"""
 
 london_co = {
     'r1': {
@@ -45,3 +45,8 @@ london_co = {
         'routing': True
     }
 }
+
+device_name = input('Введите имя устройства: ')
+param_list = '(' + ', '.join(list(london_co[device_name].keys())) + '): '
+param = input('Введите имя параметра ' + param_list)
+print(london_co[device_name][param])
