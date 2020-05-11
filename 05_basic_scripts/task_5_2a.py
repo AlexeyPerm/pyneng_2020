@@ -55,4 +55,4 @@ result = (f'Network:\n'
           f'{int(mask_oct1):<10}{int(mask_oct2):<10}{int(mask_oct3):<10}{int(mask_oct4):<10}\n'
           f'{int(mask_oct1):08b}  {int(mask_oct2):08b}  {int(mask_oct3):08b}  {int(mask_oct4):08b}\n')
 
-print(result)  # 10.25.5.5/23
+print(result)
