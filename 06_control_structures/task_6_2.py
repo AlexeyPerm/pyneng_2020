@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 6.2
 
 1. Запросить у пользователя ввод IP-адреса в формате 10.0.1.1
@@ -13,4 +13,18 @@
 
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
-'''
+"""
+
+ip = input('Ввериде ip-адрес: ')
+first_byte = int(ip.split('.')[0])
+
+if 1 <= first_byte <= 223:
+    print('unicast')
+elif 224 <= first_byte <= 239:
+    print('multicast')
+elif ip == '255.255.255.255':
+    print('local broadcast')
+elif ip == '0.0.0.0':
+    print('unassigned')
+else:
+    print('unused')
