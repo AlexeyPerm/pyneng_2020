@@ -12,12 +12,11 @@
 
 """
 
-#from sys import argv
+from sys import argv
 
 ignore = ['duplex', 'alias', 'Current configuration']
 
-#with open(argv[1]) as file:
-with open('config_sw1.txt') as file:
+with open(argv[1]) as file:
     for line in file:
         if line.startswith('!'):
             continue
