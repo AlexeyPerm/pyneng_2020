@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 7.3
 
 Скрипт должен обрабатывать записи в файле CAM_table.txt.
@@ -16,4 +16,10 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
-'''
+"""
+
+with open('CAM_table.txt') as src:
+    for line in src:
+        if 'DYNAMIC' in line:
+            result = line.split()
+            print(f' {result[0]:<4}   {result[1]}   {result[3]}')
