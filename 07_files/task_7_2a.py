@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 7.2a
 
 Сделать копию скрипта задания 7.2.
@@ -10,6 +10,19 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
-'''
+"""
+
+#from sys import argv
 
 ignore = ['duplex', 'alias', 'Current configuration']
+
+#with open(argv[1]) as file:
+with open('config_sw1.txt') as file:
+    for line in file:
+        if line.startswith('!'):
+            continue
+        for k in ignore:
+            if k in line:
+                break
+        else:
+            print(line.rstrip())
