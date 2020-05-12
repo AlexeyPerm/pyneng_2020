@@ -26,8 +26,6 @@ elif correct:
             correct = False
             break
 
-
-
 if correct:
     first_byte = int(ip.split('.')[0])
     if 1 <= first_byte <= 223:
