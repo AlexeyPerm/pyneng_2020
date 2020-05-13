@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 7.3a
 
 Сделать копию скрипта задания 7.3.
@@ -21,4 +21,15 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
-'''
+"""
+result = []
+
+with open('CAM_table.txt') as src:
+    for line in src:
+        if 'DYNAMIC' in line:
+            a = line.split()
+            a[0] = int(a[0])
+            result.append(a)
+result.sort()
+for k in result:
+    print(f' {k[0]:<9}{k[1]}   {k[3]}')
