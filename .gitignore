@@ -1,4 +1,7 @@
 .idea
+.pytest_cache
+common_functions.py
+09_functions/tests
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
