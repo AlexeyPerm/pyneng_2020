@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 9.1a
 
 Сделать копию функции из задания 9.1.
@@ -8,7 +8,8 @@
 * ввести дополнительный параметр, который контролирует будет ли настроен port-security
  * имя параметра 'psecurity'
  * по умолчанию значение None
- * для настройки port-security, как значение надо передать список команд port-security (находятся в списке port_security_template)
+ * для настройки port-security, как значение надо передать список команд port-security (находятся в списке
+                                                                                        port_security_template)
 
 Функция должна возвращать список всех портов в режиме access
 с конфигурацией на основе шаблона access_mode_template и шаблона port_security_template, если он был передан.
@@ -20,7 +21,9 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
-'''
+"""
+
+from pprint import pprint
 
 access_mode_template = [
     'switchport mode access', 'switchport access vlan',
@@ -41,4 +44,25 @@ access_config = {
 }
 
 
+def generate_access_config(intf_vlan_mapping, access_template, psecurity=None):
+    """
+    intf_vlan_mapping - словарь с соответствием интерфейс-VLAN такого вида:
+        {'FastEthernet0/12':10,
+         'FastEthernet0/14':11,
+         'FastEthernet0/16':17}
+    access_template - список команд для порта в режиме access
+    Возвращает список всех портов в режиме access с конфигурацией на основе шаблона
+    """
+    result = []
+    for intf, vlan in intf_vlan_mapping.items():
+        result.append('interface ' + intf)
+        for n in access_template:
+            if n.endswith('vlan'):
+                n = n + f' {vlan}'
+            result.append(n)
+        if psecurity:
+            result.extend(port_security_template)
+    return result
 
+
+pprint(generate_access_config(access_config, access_mode_template))
