@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 9.2
 
 Создать функцию generate_trunk_config, которая генерирует конфигурацию для trunk-портов.
@@ -32,7 +32,8 @@
 
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
-'''
+"""
+from pprint import  pprint
 
 trunk_mode_template = [
     'switchport mode trunk', 'switchport trunk native vlan 999',
@@ -45,3 +46,16 @@ trunk_config = {
     'FastEthernet0/4': [17]
 }
 
+
+def generate_trunk_config(intf_vlan_mapping, trunk_template):
+    result = []
+    for intf, vlan in intf_vlan_mapping.items():
+        result.append('interface ' + intf)
+        for n in trunk_template:
+            if n.endswith('vlan'):
+                n = n + ' {}'.format(",".join(str(k) for k in vlan))
+            result.append(n)
+    return result
+
+
+pprint(generate_trunk_config(trunk_config, trunk_mode_template))
