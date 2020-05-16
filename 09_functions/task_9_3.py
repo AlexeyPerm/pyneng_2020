@@ -47,7 +47,7 @@ def get_int_vlan_map(config_filename):
         for line in f:
             if 'Ethernet' in line:
                 intf = line.strip().split()[-1]
-            if 'access vlan' in line:
+            elif 'access vlan' in line:
                 access_dict[intf] = str_to_list(line, trunk=False)
             elif 'trunk allowed' in line:
                 trunk_dict[intf] = str_to_list(line)
