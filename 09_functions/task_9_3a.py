@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Задание 9.3a
 
 Сделать копию функции get_int_vlan_map из задания 9.3.
@@ -22,4 +22,43 @@
 
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
-'''
+"""
+
+
+def str_to_list(string, trunk=True):
+    """
+    Функция сделана потому, что захотел
+    При истинном параметре "trunk" возвращает список чисел из строки вида
+    "switchport trunk allowed vlan 100,300,400,500,600 "
+    Результат: [100, 300, 400, 500, 600]
+    Если ложь, значит порт в режиме access и строка имеет вид "switchport access vlan 10". Возвращает просто число 10.
+    """
+    if trunk:
+        str_line = string.strip().split()[-1]
+        # строка, если мы типа не читали раздел "Полезные функции"
+        # result = [int(k) for k in str_line.split(',')]
+        result = list(map(int, str_line.split(",")))
+    else:
+        result = int(string.strip().split()[-1])
+    return result
+
+
+def get_int_vlan_map(config_filename):
+    trunk_dict = {}
+    access_dict = {}
+    with open(config_filename, 'r') as f:
+        for line in f:
+            if 'Ethernet' in line:
+                intf = line.strip().split()[-1]
+            elif 'access vlan' in line:
+                access_dict[intf] = str_to_list(line, trunk=False)
+            elif 'trunk allowed' in line:
+                trunk_dict[intf] = str_to_list(line)
+            elif 'switchport mode access' in line and 'duplex auto' in f.readline():
+                access_dict[intf] = 1
+            else:
+                if
+    return access_dict, trunk_dict
+
+
+print(get_int_vlan_map(config_filename='config_sw2.txt'))
