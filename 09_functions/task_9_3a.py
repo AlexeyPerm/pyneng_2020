@@ -23,11 +23,11 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
-
+from pprint import pprint
 
 def str_to_list(string, trunk=True):
     """
-    Функция сделана потому, что захотел
+    Функция сделана, потому что захотел.
     При истинном параметре "trunk" возвращает список чисел из строки вида
     "switchport trunk allowed vlan 100,300,400,500,600 "
     Результат: [100, 300, 400, 500, 600]
@@ -50,15 +50,18 @@ def get_int_vlan_map(config_filename):
         for line in f:
             if 'Ethernet' in line:
                 intf = line.strip().split()[-1]
-            elif 'access vlan' in line:
-                access_dict[intf] = str_to_list(line, trunk=False)
-            elif 'trunk allowed' in line:
-                trunk_dict[intf] = str_to_list(line)
-            elif 'switchport mode access' in line and 'duplex auto' in f.readline():
-                access_dict[intf] = 1
-            else:
-                if
+                a = f.readline()
+                if 'mode access' in a:
+                    access = f.readline()
+                    if 'access vlan' in access:
+                        access_dict[intf] = str_to_list(access, trunk=False)
+                    elif 'duplex auto' in access:
+                        access_dict[intf] = 1
+                elif 'encapsulation dot1q' in a:
+                    trunk = f.readline()
+                    trunk_dict[intf] = str_to_list(trunk)
+
     return access_dict, trunk_dict
 
 
-print(get_int_vlan_map(config_filename='config_sw2.txt'))
+pprint(get_int_vlan_map(config_filename='config_sw2.txt'))
