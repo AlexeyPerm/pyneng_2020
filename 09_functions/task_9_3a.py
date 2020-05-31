@@ -25,6 +25,7 @@
 """
 from pprint import pprint
 
+
 def str_to_list(string, trunk=True):
     """
     Функция сделана, потому что захотел.
